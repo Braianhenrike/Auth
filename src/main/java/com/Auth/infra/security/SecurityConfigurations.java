@@ -22,7 +22,7 @@ public class SecurityConfigurations {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(HttpMethod.POST, "/company").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.build();
 	}
