@@ -9,7 +9,6 @@ This project is an API built using **Java, Java Spring, PostgresSQL as the datab
 
 This project was created for the purpose of learning and as a foundation for implementing authentication in various Spring-based projects. It serves as a practical example of how to configure Authentication and Authorization in a Spring application using Spring Security.
 
-
 ## Table of Contents
 
 - [Installation](#installation)
@@ -31,6 +30,9 @@ git clone https://github.com/Braianhenrike/Auth.git
 
 3. Install [PostgresSQL](https://www.postgresql.org/)
 
+## Configuration
+You may need to configure PostgreSQL with the necessary connection information in your Spring application. Refer to your Spring application's configuration section for details.
+
 ## Usage
 Start the application with Maven.
 
@@ -40,12 +42,10 @@ The API will be accessible at http://localhost:8080.
 The API provides the following endpoints:
 
 ```markdown
-Copy code
 POST /auth/login - Log into the App.
 
 POST /auth/register - Register a new user in the App.
 ```
-
 ## Authentication
 The API uses Spring Security for authentication control. The following roles are available:
 
@@ -53,12 +53,13 @@ The API uses Spring Security for authentication control. The following roles are
 USER -> Standard user role for logged-in users.
 ADMIN -> Admin role for managing partners (registering new partners).
 ```
+
 To access protected endpoints as an ADMIN user, provide the appropriate authentication credentials in the request header.
 
 ## Database
-The project utilizes [PostgresSQL](https://www.postgresql.org/) as the database. The necessary database migrations are managed using Flyway.
+The project utilizes PostgresSQL as the database. The necessary database migrations are managed using Flyway.
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request to the repository.
 
-When contributing to this project, please follow the existing code style, commit conventions, and submit your changes in a separate branch.```
+When contributing to this project, please follow the existing code style, commit conventions, and submit your changes in a separate branch.
