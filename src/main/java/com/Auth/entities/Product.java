@@ -17,26 +17,22 @@ import com.Auth.DTO.ProductRequestDTO;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
     private Integer price;
-
+    
+    public Product() {
+    }
     public Product(ProductRequestDTO data){
         this.price = data.price();
         this.name = data.name();
     }
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
