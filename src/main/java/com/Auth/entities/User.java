@@ -16,40 +16,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "tb_user")
+@Table(name = "users")
+@Entity(name = "users")
 public class User implements UserDetails{
-
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
-	private UserRole role;
-
-	private String email;
+	private String login;
 	
     private String password;
+    
+	private UserRole role;
 	
     public User() {
     }
 
-    public User(String email, String password, UserRole role) {
-        this.email = email;
+    public User(Long id, String login, String password, UserRole role) {
+    	this.id = id;
+        this.login = login;
         this.password = password;
         this.role = role;
 
     }
     
-    public User(Long id, UserRole role, String email, String password) {
-        this.id = id;
-        this.role = role;
-        this.email = email;
+    public User(String login, String password, UserRole role) {
+        this.login = login;
         this.password = password;
-    }	
+        this.role = role;
 
+    }
 	// Getter e Setter para id
 	public Long getId() {
 		return id;
@@ -68,13 +64,13 @@ public class User implements UserDetails{
 		this.role = role;
 	}
 
-	// Getter e Setter para email
-	public String getEmail() {
-		return email;
+	// Getter e Setter para login
+	public String getLogin() {
+		return login;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 
@@ -111,12 +107,12 @@ public class User implements UserDetails{
 	
 	@Override
 	public String getUsername() {
-		return email;
+		return login;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
