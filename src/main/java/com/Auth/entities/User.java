@@ -1,4 +1,4 @@
-package com.Auth.entities;
+ package com.Auth.entities;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.Auth.enums.UserRole;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,6 +17,11 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 @Entity(name = "users")
 public class User implements UserDetails{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5009013698335777207L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
