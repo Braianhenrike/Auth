@@ -30,26 +30,52 @@ public class User implements UserDetails{
 	
     private String password;
     
+    private String phone;
+    
+    private String photo; 
+
+    private String address;
+    
+    private String facebook;
+
+    private String gmail;
+
+    private String twitter;
+    
 	private UserRole role;
 	
     public User() {
     }
+    
+    public User(Long id, String login, String password, String phone, String photo, String address, String facebook, String gmail, String twitter, UserRole role) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.phone = phone;
+        this.photo = photo;
+        this.address = address;
+        this.facebook = facebook;
+        this.gmail = gmail;
+        this.twitter = twitter;
+        this.role = role;
+    }
 
-    public User(Long id, String login, String password, UserRole role) {
+    public User(Long id, String login, String password, String phone, UserRole role) {
     	this.id = id;
         this.login = login;
         this.password = password;
+        this.phone = phone;
         this.role = role;
 
     }
     
-    public User(String login, String password, UserRole role) {
+    public User(String login, String password, String phone, UserRole role) {
         this.login = login;
         this.password = password;
+        this.phone = phone;
         this.role = role;
 
     }
-	// Getter e Setter para id
 	public Long getId() {
 		return id;
 	}
@@ -58,7 +84,6 @@ public class User implements UserDetails{
 		this.id = id;
 	}
 
-	// Getter e Setter para role
 	public UserRole getRole() {
 		return role;
 	}
@@ -67,7 +92,6 @@ public class User implements UserDetails{
 		this.role = role;
 	}
 
-	// Getter e Setter para login
 	public String getLogin() {
 		return login;
 	}
@@ -76,6 +100,55 @@ public class User implements UserDetails{
 		this.login = login;
 	}
 
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+
+	public String getFacebook() {
+		return facebook;
+	}
+
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
+	}
+
+	public String getGmail() {
+		return gmail;
+	}
+
+	public void setGmail(String gmail) {
+		this.gmail = gmail;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
 
 	public String getPassword() {
 		return password;

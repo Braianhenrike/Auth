@@ -3,6 +3,8 @@ package com.Auth.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,13 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.Auth.DTO.AuthenticationDTO;
 import com.Auth.DTO.RegisterUserDTO;
 import com.Auth.DTO.LoginResponseDTO;
 import com.Auth.entities.User;
+import com.Auth.enums.UserRole;
 import com.Auth.infra.security.TokenService;
 import com.Auth.repositories.UserRepository;
+import com.Auth.services.UserRoleService;
 
 @RestController
 @RequestMapping("auth")
@@ -30,7 +35,9 @@ public class AuthenticationController {
 
 	@Autowired
 	private UserRepository repository;
-	
+
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@Autowired
 	private TokenService tokenService;
@@ -40,10 +47,15 @@ public class AuthenticationController {
 	    var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
 	    
 	    var auth = this.authenticationManager.authenticate(usernamePassword);
-	    
+
 	    var token = tokenService.generateToken((User) auth.getPrincipal());
 
-		return ResponseEntity.ok(new LoginResponseDTO(token));
+	    var user = (User) auth.getPrincipal(); 
+
+	    System.out.println("Token gerado: " + token + " Role retornada:" + user.getRole().getRole() + " ID:" + user.getId());
+	    
+	    return ResponseEntity.ok(new LoginResponseDTO(token, user.getRole().getRole(), user.getId()));
+
 	}
 
 	@PostMapping("/register")
@@ -52,15 +64,11 @@ public class AuthenticationController {
 			return ResponseEntity.badRequest().build();
 
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-		User newUser = new User(data.login(), encryptedPassword, data.role());
+		User newUser = new User(data.login(), encryptedPassword, data.phone(), data.role());
 
 		this.repository.save(newUser);
 
 		return ResponseEntity.ok().build();
 	}
-	
-	@GetMapping("/messages")
-	public ResponseEntity<List<String>> messages(){
-		return ResponseEntity.ok(Arrays.asList("Register ok"));
-	}
+
 }
